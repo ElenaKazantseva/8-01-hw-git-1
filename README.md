@@ -35,18 +35,13 @@
 ```
 
 1. `Zabbix на хосте работает`
-   ![Zabbix на хосте работает](https://github.com/ElenaKazantseva/homeworks/blob/hw-zabbix-1/img/Screenshot_12.jpg)
-2. `Авторизация в веб-интерфейсе`
-   ![Скриншот авторизации в веб-интерфейсе 1](https://github.com/ElenaKazantseva/homeworks/blob/hw-zabbix-1/img/Screenshot_14.jpg)
-![Скриншот авторизации в веб-интерфейсе 2](https://github.com/ElenaKazantseva/homeworks/blob/hw-zabbix-1/img/Screenshot_16.jpg)
-4. `Заполните здесь этапы выполнения, если требуется ....`
-5. `Заполните здесь этапы выполнения, если требуется ....`
-6. `Заполните здесь этапы выполнения, если требуется ....`
-7. 
 
+![Zabbix на хосте работает](https://github.com/ElenaKazantseva/homeworks/blob/hw-zabbix-1/img/Screenshot_12.jpg)
+   
+2. `Авторизация в веб-интерфейсе`
+   
 ![Скриншот авторизации в веб-интерфейсе 1](https://github.com/ElenaKazantseva/homeworks/blob/hw-zabbix-1/img/Screenshot_14.jpg)
 ![Скриншот авторизации в веб-интерфейсе 2](https://github.com/ElenaKazantseva/homeworks/blob/hw-zabbix-1/img/Screenshot_16.jpg)
-![Zabbix на хосте работает](https://github.com/ElenaKazantseva/homeworks/blob/hw-zabbix-1/img/Screenshot_12.jpg)
 
 ---
 
