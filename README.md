@@ -24,8 +24,8 @@
 # apt update
 # apt install zabbix-server-pgsql zabbix-frontend-php php7.4-pgsql zabbix-apache-conf zabbix-sql-scripts
 # systemctl status zabbix-server.service
-# sudo -u postgres createuser --pwprompt zabbix
-# sudo -u postgres createdb -O zabbix zabbix
+# -u postgres createuser --pwprompt zabbix
+# -u postgres createdb -O zabbix zabbix
 # zcat /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz | sudo -u zabbix psql zabbix
 # sed -i 's/# DBPassword=/DBPassword=123456789/g' /etc/zabbix/zabbix_server.conf
 # systemctl restart zabbix-server apache2
@@ -45,18 +45,57 @@
 
 ---
 
-### Задание 2
+### Задание 2 
 
-**Что нужно сделать:**
+Установите Zabbix Agent на два хоста.
 
-1. Создайте файл .gitignore (обратите внимание на точку в начале файла) и проверьте его статус сразу после создания.
-1. Добавьте файл .gitignore в следующий коммит `git add...`.
-1. Напишите правила в этом файле, чтобы игнорировать любые файлы `.pyc`, а также все файлы в директории `cache`.
-1. Сделайте коммит и пуш.
+#### Процесс выполнения
+1. Выполняя ДЗ, сверяйтесь с процессом отражённым в записи лекции.
+2. Установите Zabbix Agent на 2 вирт.машины, одной из них может быть ваш Zabbix Server.
+3. Добавьте Zabbix Server в список разрешенных серверов ваших Zabbix Agentов.
+4. Добавьте Zabbix Agentов в раздел Configuration > Hosts вашего Zabbix Servera.
+5. Проверьте, что в разделе Latest Data начали появляться данные с добавленных агентов.
 
-В качестве ответа добавьте ссылку на этот коммит в ваш md-файл с решением:
+#### Требования к результаты 
+1. Приложите в файл README.md скриншот раздела Configuration > Hosts, где видно, что агенты подключены к серверу
+2. Приложите в файл README.md скриншот лога zabbix agent, где видно, что он работает с сервером
+3. Приложите в файл README.md скриншот раздела Monitoring > Latest data для обоих хостов, где видны поступающие от агентов данные.
+4. Приложите в файл README.md текст использованных команд в GitHub
 
-[ссылка на мое решение, Second commit](https://github.com/ElenaKazantseva/hw-git-1/commit/f239802bc3c0733b4070aa47cce4611033454235)
+Текст моих команд:
+
+```bash
+# ssh cubic@158.160.34.218
+# apt update
+# wget https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.0-4+ubuntu20.04_all.deb
+# dpkg -i zabbix-release_6.0-4+ubuntu20.04_all.deb
+# apt update
+# apt install zabbix-agent
+# systemctl status zabbix-agent.service
+# tail -f /var/log/zabbix/zabbix_agentd.log
+# sed -i 's/Server=127.0.0.1/Server=95.215.86.93/g' /etc/zabbix/zabbix_agentd.conf
+# cat /etc/zabbix/zabbix_agentd.conf | grep Server=
+# systemctl restart zabbix-agent.service
+# systemctl status zabbix-agent.service
+```
+
+1. `скриншот раздела Configuration > Hosts, где видно, что агенты подключены к серверу`
+
+![Zabbix на хосте работает]()
+   
+2. `скриншот лога zabbix agent, где видно, что он работает с сервером:
+   на ВМ в Яндексе (только агент)
+   на ВМ на компьютере (заббикс-сервер)`
+   
+![ВМ в Яндексе (только агент)]()
+
+![ВМ на компьютере (заббикс-сервер)]()
+
+3. `скриншот раздела Monitoring > Latest data для обоих хостов, где видны поступающие от агентов данные`
+
+![ВМ в Яндексе (только агент)]()
+
+![ВМ на компьютере (заббикс-сервер)]()
 
 ---
 
