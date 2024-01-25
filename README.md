@@ -40,7 +40,7 @@
    
 2. `Авторизация в веб-интерфейсе`
    
-![Скриншот авторизации в веб-интерфейсе 1](https://github.com/ElenaKazantseva/homeworks/blob/hw-zabbix-1/img/Screenshot_14.jpg)
+![Скриншот авторизации в веб-интерфейсе 1](https://github.com/ElenaKazantseva/homeworks/blob/hw-zabbix-1/img/Screenshot_14-1.jpg)
 ![Скриншот авторизации в веб-интерфейсе 2](https://github.com/ElenaKazantseva/homeworks/blob/hw-zabbix-1/img/Screenshot_16.jpg)
 
 ---
