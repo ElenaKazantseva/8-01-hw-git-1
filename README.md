@@ -119,6 +119,7 @@ Finished: SUCCESS
 ```
 
 Результат сборки (скриншот):
+
 ![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/sdvps-8-02-CICD/img/Screenshot_2.jpg)
 
 ![Screenshot_1](https://github.com/ElenaKazantseva/homeworks/blob/sdvps-8-02-CICD/img/Screenshot_1.jpg)
@@ -135,11 +136,96 @@ Finished: SUCCESS
 
 В качестве ответа пришлите скриншоты с настройками проекта и результатами выполнения сборки.
 
----
+Результат сборки (консоль):
+```
+Started by user admin
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/my_pipeline1
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Git)
+[Pipeline] git
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/my_pipeline1/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url http://github.com/ElenaKazantseva/sdvps-8-02.git # timeout=10
+Fetching upstream changes from http://github.com/ElenaKazantseva/sdvps-8-02.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.25.1'
+ > git fetch --tags --force --progress -- http://github.com/ElenaKazantseva/sdvps-8-02.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+Checking out Revision 223dbc3f489784448004e020f2ef224f17a7b06d (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 223dbc3f489784448004e020f2ef224f17a7b06d # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git checkout -b master 223dbc3f489784448004e020f2ef224f17a7b06d # timeout=10
+Commit message: "Update README.md"
+First time build. Skipping changelog.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] sh
++ /usr/lib/go-1.21/bin/go test .
+ok  	github.com/netology-code/sdvps-materials	0.001s
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] sh
++ docker build . -t ubuntu-bionic:8082/hello-world:v2
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
 
-В качестве ответа добавьте ссылку на этот коммит в ваш md-файл с решением:
+Sending build context to Docker daemon  250.4kB
 
-[ссылка на мое решение, Second commit](https://github.com/ElenaKazantseva/hw-git-1/commit/f239802bc3c0733b4070aa47cce4611033454235)
+Step 1/8 : FROM golang:1.16 AS builder
+ ---> 972d8c0bc0fc
+Step 2/8 : WORKDIR $GOPATH/src/github.com/netology-code/sdvps-materials
+ ---> Using cache
+ ---> 07947b262148
+Step 3/8 : COPY . ./
+ ---> f61d98811ff6
+Step 4/8 : RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix nocgo -o /app .
+ ---> Running in f6bc4f7aaff6
+Removing intermediate container f6bc4f7aaff6
+ ---> ad4bf502b80b
+Step 5/8 : FROM alpine:latest
+ ---> 05455a08881e
+Step 6/8 : RUN apk -U add ca-certificates
+ ---> Using cache
+ ---> 758307ef8b40
+Step 7/8 : COPY --from=builder /app /app
+ ---> Using cache
+ ---> b68ef1a05872
+Step 8/8 : CMD ["/app"]
+ ---> Using cache
+ ---> e48e34c486c8
+Successfully built e48e34c486c8
+Successfully tagged ubuntu-bionic:8082/hello-world:v2
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
+```
+
+
+Результат сборки (скриншот):
+
+![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/sdvps-8-02-CICD/img/Screenshot_9.jpg)
+
+![Screenshot_1](https://github.com/ElenaKazantseva/homeworks/blob/sdvps-8-02-CICD/img/Screenshot_1%20(2).jpg)
+
+Настройки проекта:
+
+![Screenshot_9](https://github.com/ElenaKazantseva/homeworks/blob/sdvps-8-02-CICD/img/Screenshot_4.jpg)
+
+
 
 ---
 
