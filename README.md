@@ -124,6 +124,17 @@ Finished: SUCCESS
 
 ![Screenshot_1](https://github.com/ElenaKazantseva/homeworks/blob/sdvps-8-02-CICD/img/Screenshot_1.jpg)
 
+Настройки проекта:
+
+![Screenshot_9](https://github.com/ElenaKazantseva/homeworks/blob/sdvps-8-02-CICD/img/Screenshot_02.jpg)
+
+![Screenshot_9](https://github.com/ElenaKazantseva/homeworks/blob/sdvps-8-02-CICD/img/Screenshot_03.jpg)
+
+![Screenshot_9](https://github.com/ElenaKazantseva/homeworks/blob/sdvps-8-02-CICD/img/Screenshot_06.jpg)
+
+![Screenshot_9](https://github.com/ElenaKazantseva/homeworks/blob/sdvps-8-02-CICD/img/Screenshot_07.jpg)
+
+
 
 ---
 
