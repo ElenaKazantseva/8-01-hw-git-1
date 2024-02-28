@@ -11,6 +11,7 @@
 
 В качестве ответа пришлите скриншоты с настройками проекта и результатами выполнения сборки.
 
+Результат сборки (консоль):
 ```
 Started by user admin
 Running as SYSTEM
@@ -117,10 +118,11 @@ Successfully tagged ubuntu-bionic:8082/hello-world:v4
 Finished: SUCCESS
 ```
 
-В качестве ответа добавьте ссылку на этот коммит в ваш md-файл с решением:
-![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/assets/157218393/5e4dfdd4-5a2b-485c-ab46-9a0cbcca57a3)
+Результат сборки (скриншот):
+![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/sdvps-8-02-CICD/img/Screenshot_2.jpg)
 
-[ссылка на мое решение, First commit](https://github.com/ElenaKazantseva/hw-git-1/commit/461e4e909894bfbb7787d6e092feb78cd27f4d44)
+![Screenshot_1](https://github.com/ElenaKazantseva/homeworks/blob/sdvps-8-02-CICD/img/Screenshot_1.jpg)
+
 
 ---
 
