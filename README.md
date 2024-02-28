@@ -252,10 +252,112 @@ Finished: SUCCESS
 В качестве ответа пришлите скриншоты с настройками проекта и результатами выполнения сборки.
 
 
-В качестве ответа прикрепите ссылку на граф коммитов https://github.com/ваш-логин/ваш-репозиторий/network в ваш md-файл с решением.
 
-Ваш граф комитов должен выглядеть аналогично скриншоту:   
 
-![скрин для Git](https://github.com/netology-code/sdvps-homeworks/assets/77622076/e73589cf-7e97-40e5-ac01-d1d55376f1b9)
+Нексус запустился, репозиторий был создан. Команду для создания бинарного go-файла нашла, все собирается. 
+Загрузите файл в репозиторий с помощью jenkins. - Вот тут ну никак не получается, вроде уже все попробовала, но не выходит. 
+Было три разных ошибки: 
+1) http response to https-client,
+2) 404 misbehaving (dial tcp: lookup ubuntu-bionic on 127.0.0.53:53: server misbehaving),
+3) Error response from daemon: login attempt to http://ip:port/v2/ failed with status: 404 Not Found
 
-[ссылка на мое решение, graph](https://github.com/ElenaKazantseva/hw-git-1/network)
+Последняя ошибка следующая: 
+Error response from daemon: login attempt to http://ubuntu-bionic:8081/v2/ failed with status: 404 Not Found
+
+Настройки:
+
+```
+pipeline {
+ agent any
+ stages {
+  stage('Git') {
+   steps {git 'http://github.com/ElenaKazantseva/sdvps-8-02.git'}
+  }
+  stage('Test') {
+   steps {
+    sh '/usr/lib/go-1.21/bin/go test .'
+   }
+  }
+  stage('Build') {
+   steps {
+    sh 'go build -a -installsuffix nocgo .'
+   }
+  }
+  stage('Push') {
+   steps {
+    sh 'docker login ubuntu-bionic:8081 -u admin -p 12345 && docker push ubuntu-bionic:8081/hello-world:v$BUILD_NUMBER && docker logout'   }
+  }
+ }
+}
+```
+
+
+![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/sdvps-8-02-CICD/img/Screenshot_70%20(7).jpg)
+
+![Screenshot_1](https://github.com/ElenaKazantseva/homeworks/blob/sdvps-8-02-CICD/img/Screenshot_70%20(2).jpg)
+
+![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/sdvps-8-02-CICD/img/Screenshot_70%20(5).jpg)
+
+
+
+Результат последней, 27-й сборки (консоль):
+```
+Started by user admin
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/my_pipeline_nexus
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Git)
+[Pipeline] git
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/my_pipeline_nexus/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url http://github.com/ElenaKazantseva/sdvps-8-02.git # timeout=10
+Fetching upstream changes from http://github.com/ElenaKazantseva/sdvps-8-02.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.25.1'
+ > git fetch --tags --force --progress -- http://github.com/ElenaKazantseva/sdvps-8-02.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+Checking out Revision 223dbc3f489784448004e020f2ef224f17a7b06d (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 223dbc3f489784448004e020f2ef224f17a7b06d # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D master # timeout=10
+ > git checkout -b master 223dbc3f489784448004e020f2ef224f17a7b06d # timeout=10
+Commit message: "Update README.md"
+ > git rev-list --no-walk 223dbc3f489784448004e020f2ef224f17a7b06d # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] sh
++ /usr/lib/go-1.21/bin/go test .
+ok  	github.com/netology-code/sdvps-materials	(cached)
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] sh
++ go build -a -installsuffix nocgo .
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Push)
+[Pipeline] sh
++ docker login ubuntu-bionic:8081 -u admin -p 12345
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+Error response from daemon: login attempt to http://ubuntu-bionic:8081/v2/ failed with status: 404 Not Found
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+ERROR: script returned exit code 1
+Finished: FAILURE
+```
+
+
+Мне кажется, я что-то упускаю, но уже даже не могу придумать, что
+Спасите пожалуйста
