@@ -358,10 +358,15 @@ ERROR: script returned exit code 1
 Finished: FAILURE
 ```
 
-Добавляла запись в `/etc/hosts` : `public ip ubuntu-bionic, internal ip ubuntu-bionic` (ничего не помогло)
-Добавляла запись в `/etc/resolv.conf` : `ubuntu-bionic public ip , ubuntu-bionic internal ip` (ничего не помогло)
+Добавляла запись в `/etc/hosts` : `public ip ubuntu-bionic, internal ip ubuntu-bionic` (ничего не помогло).
+
+Добавляла запись в `/etc/resolv.conf` : `ubuntu-bionic public ip , ubuntu-bionic internal ip` (ничего не помогло).
+
 создала файл `/etc/default/docker` с содержимым `docker_opts="--config-file=/etc/docker/daemon.json` (не помогло)
 Порты все открыты, пользователь во всех группах.
-После изменения файла `/etc/docker/daemon.json` всегда перезапускала сервис, пробовала все комбинации между данным файлом и настройками pipeline Jenkins: где-то ставила ubuntu-bionic, где-то публичный ip, или везде одинаково. Ничего не помогает
+
+После изменения файла `/etc/docker/daemon.json` всегда перезапускала сервис, пробовала все комбинации между данным файлом и настройками pipeline Jenkins: где-то ставила ubuntu-bionic, где-то публичный ip, или везде одинаково. Ничего не помогает.
+
 Может быть где-нибудь изменения просто не вступили в силу? Если да, как это можно проконтролировать или проверить? 
+
 Что я делаю не так? Спасите пожалуйста
