@@ -12,13 +12,17 @@
 В качестве ответа в репозиторий шаблона с решением добавьте скриншоты с настройками раннера в проекте.
 
 Решение.
-Настройки раннера в проекте:
+Этапы регистрации раннера:
 
 ![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/1%20(2).jpg)
 
 ![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/1%20(3).jpg)
 
+Статус раннера:
+
 ![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/1%20(1).jpg)
+
+Настройки раннера:
 
 ![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/Screenshot_71%20(1).jpg)
 
