@@ -252,19 +252,9 @@ Finished: SUCCESS
 В качестве ответа пришлите скриншоты с настройками проекта и результатами выполнения сборки.
 
 
+Решение:
 
-
-Нексус запустился, репозиторий был создан. Команду для создания бинарного go-файла нашла, все собирается. 
-Загрузите файл в репозиторий с помощью jenkins. - Вот тут ну никак не получается, вроде уже все попробовала, но не выходит. 
-Было три разных ошибки: 
-1) http response to https-client,
-2) 404 misbehaving (dial tcp: lookup ubuntu-bionic on 127.0.0.53:53: server misbehaving),
-3) Error response from daemon: login attempt to http://ip:port/v2/ failed with status: 404 Not Found
-
-Последняя ошибка следующая: 
-Error response from daemon: login attempt to http://ubuntu-bionic:8081/v2/ failed with status: 404 Not Found
-
-Настройки:
+Настройки проекта:
 
 ```
 pipeline {
@@ -285,22 +275,24 @@ pipeline {
   }
   stage('Push') {
    steps {
-    sh 'docker login ubuntu-bionic:8081 -u admin -p 12345 && docker push ubuntu-bionic:8081/hello-world:v$BUILD_NUMBER && docker logout'   }
+    sh 'curl -u "admin:12345" http://84.252.128.207:8081/repository/my_repo/hello-world:v$BUILD_NUMBER -F "file=ubuntu-bionic:8081/hello-world:v$BUILD_NUMBER"'   }
   }
  }
 }
 ```
 
-
-![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/sdvps-8-02-CICD/img/Screenshot_70%20(7).jpg)
-
-![Screenshot_1](https://github.com/ElenaKazantseva/homeworks/blob/sdvps-8-02-CICD/img/Screenshot_70%20(2).jpg)
-
-![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/sdvps-8-02-CICD/img/Screenshot_70%20(5).jpg)
+Результаты сборки (скриншоты):
 
 
+![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/main/img/Screenshot_34%20(2).jpg)
 
-Результат последней, 27-й сборки (консоль):
+![Screenshot_1](https://github.com/ElenaKazantseva/homeworks/blob/main/img/Screenshot_34%20(3).jpg)
+
+![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/main/img/Screenshot_34%20(1).jpg)
+
+
+
+Результат сборки (консоль):
 ```
 Started by user admin
 [Pipeline] Start of Pipeline
@@ -346,28 +338,64 @@ ok  	github.com/netology-code/sdvps-materials	(cached)
 [Pipeline] stage
 [Pipeline] { (Push)
 [Pipeline] sh
-+ docker login ubuntu-bionic:8081 -u admin -p 12345
-WARNING! Using --password via the CLI is insecure. Use --password-stdin.
-Error response from daemon: login attempt to http://ubuntu-bionic:8081/v2/ failed with status: 404 Not Found
++ curl -u admin:12345 http://84.252.128.207:8081/repository/my_repo/hello-world:v38 -F file=ubuntu-bionic:8081/hello-world:v38
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100  1674  100  1501  100   173  28320   3264 --:--:-- --:--:-- --:--:-- 31000
+100  1674  100  1501  100   173  28320   3264 --:--:-- --:--:-- --:--:-- 31000
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>405 - Sonatype Nexus Repository</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+
+  <link rel="icon" type="image/png" href="../../static/rapture/resources/safari-favicon-32x32.png?3.65.0-02" sizes="32x32">
+  <link rel="mask-icon" href="../../static/rapture/resources/favicon-white.svg?3.65.0-02" color="#00bb6c">
+  <link rel="icon" type="image/png" href="../../static/rapture/resources/favicon.svg?3.65.0-02" sizes="16x16">
+
+  <link rel="stylesheet" type="text/css" href="../../static/css/nexus-content.css?3.65.0-02"/>
+</head>
+<body>
+<div class="nexus-header">
+  <a href="../..">
+    <div class="product-logo">
+      <img src="../../static/rapture/resources/nxrm-reverse-icon.png?3.65.0-02" alt="Product logo"/>
+    </div>
+    <div class="product-id">
+      <div class="product-id__line-1">
+        <span class="product-name">Sonatype Nexus Repository</span>
+      </div>
+      <div class="product-id__line-2">
+        <span class="product-spec">OSS 3.65.0-02</span>
+      </div>
+    </div>
+  </a>
+</div>
+
+<div class="nexus-body">
+  <div class="content-header">
+    <img src="../../static/rapture/resources/icons/x32/exclamation.png?3.65.0-02" alt="Exclamation point" aria-role="presentation"/>
+    <span class="title">Error 405</span>
+    <span class="description">Method Not Allowed</span>
+  </div>
+  <div class="content-body">
+    <div class="content-section">
+      POST
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
 [Pipeline] }
 [Pipeline] // stage
 [Pipeline] }
 [Pipeline] // node
 [Pipeline] End of Pipeline
-ERROR: script returned exit code 1
-Finished: FAILURE
+Finished: SUCCESS
 ```
 
-Добавляла запись в `/etc/hosts` : `public ip ubuntu-bionic, internal ip ubuntu-bionic` (ничего не помогло).
-
-Добавляла запись в `/etc/resolv.conf` : `ubuntu-bionic public ip , ubuntu-bionic internal ip` (ничего не помогло).
-
-создала файл `/etc/default/docker` с содержимым `docker_opts="--config-file=/etc/docker/daemon.json` (не помогло).
-
-Порты все открыты, пользователь во всех группах.
-
-После изменения файла `/etc/docker/daemon.json` всегда перезапускала сервис, пробовала все комбинации между данным файлом и настройками pipeline Jenkins: где-то ставила ubuntu-bionic, где-то публичный ip, или везде одинаково. Ничего не помогает.
-
-Может быть где-нибудь изменения просто не вступили в силу? Если да, как это можно проконтролировать или проверить? 
-
-Что я делаю не так? Спасите пожалуйста
