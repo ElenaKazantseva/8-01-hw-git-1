@@ -14,13 +14,13 @@
 Решение.
 Настройки раннера в проекте:
 
-[ссылка на мое решение](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/1%20(2).jpg)
+![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/1%20(2).jpg)
 
-[ссылка на мое решение](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/1%20(3).jpg)
+![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/1%20(3).jpg)
 
-[ссылка на мое решение](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/1%20(1).jpg)
+![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/1%20(1).jpg)
 
-[ссылка на мое решение](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/Screenshot_71%20(1).jpg)
+![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/Screenshot_71%20(1).jpg)
 
 
 ---
@@ -61,12 +61,15 @@ build:
 
   `image: golang:1.19.1` - нужно было изменить, потому что до установки раннера была установлена другая версия
 
+![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/Screenshot_71%20(8).jpg)
 
-Получилось скачать репозиторий с го-файлами на ВМ 
- `[image: golang:1.19.1](https://github.com/netology-code/sdvps-materials)` ,
-и затем запушить его и docker-ci.yml в мой удаленный репозиторий gitlab1  
 
- [ссылка на мое решение](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/Screenshot_71%20(8).jpg)
+Получилось скачать [репозиторий с го-файлами](https://github.com/netology-code/sdvps-materials) на ВМ,
+и затем запушить его и docker-ci.yml в мой удаленный репозиторий `gitlab1` 
+
+
+![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/Screenshot_71%20(7).jpg)
+
 
 
  
