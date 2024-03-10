@@ -76,7 +76,73 @@ build:
 ![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/Screenshot_71%20(7).jpg)
 
 
+Но сборки не получились. Ни одно из заданий, описанных в docker-ci.yml (test, build), не было выполнено:
 
- 
+![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/Screenshot_runner%20(6).jpg)
 
+![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/Screenshot_runner%20(7).jpg)
+
+
+Гитлаб видит раннер:
+
+![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/Screenshot_runner%20(4).jpg)
+
+
+Настройки раннера:
+
+![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/Screenshot_runner%20(3).jpg)
+
+в докере:
+
+![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/Screenshot_runner%20(10).jpg)
+
+![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/Screenshot_runner%20(12).jpg)
+
+![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/Screenshot_runner%20(13).jpg)
+
+![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/Screenshot_runner%20(14).jpg)
+
+Логи докер-контейнера:
+
+![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/Screenshot_runner%20(9).jpg)
+
+Контейнер запускался и регистрировался через команды из дополнительных материалов к домашнему заданию:
+
+Установка и регистрация:
+
+```
+docker run -ti --rm --name gitlab-runner \
+     --network host \
+     -v /srv/gitlab-runner/config:/etc/gitlab-runner \
+     -v /var/run/docker.sock:/var/run/docker.sock \
+     gitlab/gitlab-runner:latest register
+```
+
+Запуск:
+
+```
+docker run -d --name gitlab-runner --restart always \
+     --network host \
+     -v /srv/gitlab-runner/config:/etc/gitlab-runner \
+     -v /var/run/docker.sock:/var/run/docker.sock \
+     gitlab/gitlab-runner:latest
+```
+
+
+Настройки /etc/hosts:
+
+![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/Screenshot_runner%20(5).jpg)
+
+Настройки gitlab.rb:
+
+![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/Screenshot_runner%20(1).jpg)
+
+Вывод команды gitlab-ctl status
+
+![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/Screenshot_runner%20(8).jpg)
+
+
+В логах почему-то стоит неактуальный ip-адрес, хотя во всех настройках он исправлен на актуальный и сервисы перезапущены. 
+Никак не получается настроить работу раннера, чтобы он выполнил свои задания.
+Пожалуйста, помогите
  
