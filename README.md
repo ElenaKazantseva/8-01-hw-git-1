@@ -171,7 +171,7 @@ docker run -d --name gitlab-runner --restart always \
 Сейчас, после того как Вы сказали, что вероятнее всего является причиной, было проще сформулировать запрос и ответ нашелся быстро:
 [set network_mode with network name in the config.toml](https://stackoverflow.com/questions/50325932/gitlab-runner-docker-could-not-resolve-host)
 
-Я прописала значение в config.toml:
+Я прописала значение в config.toml (самая последняя строчка):
 
 ![Screenshot_2](https://github.com/ElenaKazantseva/homeworks/blob/hw-gitlab-1/img/конфи.jpg)
 
