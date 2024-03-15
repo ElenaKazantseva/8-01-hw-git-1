@@ -60,7 +60,6 @@ Playbook1.yml:
       - "{{ bin_files.stdout }}"
 ```
 
-![скрин для Git](https://github.com/ElenaKazantseva/homeworks/blob/hw-ansible-2/img/1%20(1).jpg)
 
 ![скрин для Git](https://github.com/ElenaKazantseva/homeworks/blob/hw-ansible-2/img/1%20(2).jpg)
 
@@ -159,7 +158,43 @@ playbook3.yml
 
 Модифицируйте плейбук из пункта 3, задания 1. В качестве приветствия он должен установить IP-адрес и hostname управляемого хоста, пожелание хорошего дня системному администратору. 
 
-![скрин для Git](https://github.com/netology-code/sdvps-homeworks/assets/77622076/e73589cf-7e97-40e5-ac01-d1d55376f1b9)
+Решение:
+
+playbook3_1.yml
+
+```yaml
+- hosts: test_servers
+  gather_facts: yes
+  become:
+    true
+  become_method:
+    sudo
+  become_user:
+    root
+  remote_user:
+    cubic
+  tasks:
+    - name: find out ip of a host
+      shell: dig +short myip.opendns.com @resolver1.opendns.com
+      register: ippub
+
+    - set_fact:
+        ippub={{ ippub.stdout }}
+
+    - name: Insert/Update ssh-motd
+      ansible.builtin.blockinfile:
+        path: /etc/update-motd.d/00-header
+        backup: yes
+        insertafter: " Hello from Ansible! "
+        block: |
+          printf " Welcome to {{ inventory_hostname }} , {{ ippub }} !
+          Have a good day! "
+
+```
+
+Ход выполнения:
+
+![скрин для Git](https://github.com/ElenaKazantseva/homeworks/blob/hw-ansible-2/img/3_1.jpg)
 
 ---
 
@@ -182,6 +217,145 @@ playbook3.yml
 - разместите архив созданной роли у себя на Google диске и приложите ссылку на роль в своём решении;
 - предоставьте скриншоты выполнения плейбука;
 - предоставьте скриншот браузера, отображающего сконфигурированный index.html в качестве сайта.
+
+
+
+Решение:
+
+/etc/ansible/inventory/playbook4.yml
+
+```yaml
+- hosts: test_servers
+  become:
+    true
+  become_method:
+    sudo
+  become_user:
+    root
+  remote_user:
+    cubic
+  roles:
+   - apache2
+```
+
+
+/etc/ansible/roles/apache2/tasks/main.yml
+
+```yaml
+- name: Update and upgrade apt packages
+  become: true
+  apt:
+    upgrade: 'yes'
+    update_cache: yes
+    cache_valid_time: 3400
+
+- name: Install Apache2
+  apt:
+    name=apache2
+    state=latest
+  notify:
+    - apache2 systemd
+
+- name: Create index.html using Jinja2
+  template:
+    src: index.j2
+    dest: /var/www/html/index.html
+
+- name: set index.html as the default page
+  ansible.builtin.lineinfile:
+    path: /etc/apache2/apache2.conf
+    regexp: '^DirectoryIndex '
+    insertafter: '^#DirectoryIndex '
+    line: DirectoryIndex index.html
+  notify:
+    - apache2 restart
+
+- name: Allow all access to tcp port 80
+  ufw:
+    rule: allow
+    port: '80'
+    proto: tcp
+
+- name: find out ip of a host
+  shell: dig +short myip.opendns.com @resolver1.opendns.com
+  register: ippub
+
+- set_fact:
+    ippub={{ ippub.stdout }}
+
+- name: Check that you can connect to a page and it returns a status 200
+  ansible.builtin.uri:
+    url: http://{{ ippub }}
+
+```
+
+
+/etc/ansible/roles/apache2/handlers/main.yml
+
+```yaml
+- name: apache2 systemd
+  systemd:
+    name: apache2
+    enabled: yes
+    state: started
+
+- name: apache2 restart
+  service:
+    name=apache2
+    state=restarted
+
+```
+
+
+/etc/ansible/roles/apache2/templates/index.j2
+
+```yaml
+Welcome!
+
+System information:
+
+Hostname: {{ hostvars['cat1']['inventory_hostname'] }}
+
+IP Address: {{ hostvars['cat1']['ansible_facts']['eth0']['ipv4']['address'] }}
+
+CPU: {{ hostvars['cat1']['ansible_processor_vcpus'] }}
+
+RAM: {{ hostvars['cat1']['ansible_memory_mb'] }}
+
+HDD : {{ hostvars['cat1']['ansible_facts']['devices']['vda']['size'] }}
+
+
+
+Hostname: {{ hostvars['dog2']['inventory_hostname'] }}
+
+IP Address: {{ hostvars['dog2']['ansible_facts']['eth0']['ipv4']['address'] }}
+
+CPU: {{ hostvars['dog2']['ansible_processor_vcpus'] }}
+
+RAM: {{ hostvars['dog2']['ansible_memory_mb'] }}
+
+HDD : {{ hostvars['dog2']['ansible_facts']['devices']['vda']['size'] }}
+
+```
+
+
+Ход выполнения:
+
+
+Файл inventory для всех плейбуков:
+
+![скрин для Git](https://github.com/ElenaKazantseva/homeworks/blob/hw-ansible-2/img/2%20(4).jpg)
+
+
+
+![скрин для Git](https://github.com/netology-code/sdvps-homeworks/assets/77622076/e73589cf-7e97-40e5-ac01-d1d55376f1b9)
+
+![скрин для Git](https://github.com/netology-code/sdvps-homeworks/assets/77622076/e73589cf-7e97-40e5-ac01-d1d55376f1b9)
+
+
+![скрин для Git](https://github.com/netology-code/sdvps-homeworks/assets/77622076/e73589cf-7e97-40e5-ac01-d1d55376f1b9)
+
+![скрин для Git](https://github.com/netology-code/sdvps-homeworks/assets/77622076/e73589cf-7e97-40e5-ac01-d1d55376f1b9)
 
 ![скрин для Git](https://github.com/netology-code/sdvps-homeworks/assets/77622076/e73589cf-7e97-40e5-ac01-d1d55376f1b9)
 
