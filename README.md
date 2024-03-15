@@ -17,12 +17,18 @@
 
 Решение:
 
+Файл inventory для всех плейбуков:
+
+![скрин для Git](https://github.com/ElenaKazantseva/homeworks/blob/hw-ansible-2/img/2%20(4).jpg)
+
+
+
 1. Скачать какой-либо архив, создать папку для распаковки и распаковать скаченный архив. При этом можно скачать как исходный код, так и бинарные файлы, запакованные в архив — в нашем задании не принципиально.
+
 
 Playbook1.yml:
 
-```
-yaml
+```yaml
 - hosts: test_servers
   gather_facts: yes
   become:
@@ -54,15 +60,96 @@ yaml
       - "{{ bin_files.stdout }}"
 ```
 
-![скрин для Git](https://github.com/netology-code/sdvps-homeworks/assets/77622076/e73589cf-7e97-40e5-ac01-d1d55376f1b9)
+![скрин для Git](https://github.com/ElenaKazantseva/homeworks/blob/hw-ansible-2/img/1%20(1).jpg)
 
-![скрин для Git](https://github.com/netology-code/sdvps-homeworks/assets/77622076/e73589cf-7e97-40e5-ac01-d1d55376f1b9)
+![скрин для Git](https://github.com/ElenaKazantseva/homeworks/blob/hw-ansible-2/img/1%20(2).jpg)
 
-![скрин для Git](https://github.com/netology-code/sdvps-homeworks/assets/77622076/e73589cf-7e97-40e5-ac01-d1d55376f1b9)
+![скрин для Git](https://github.com/ElenaKazantseva/homeworks/blob/hw-ansible-2/img/1%20(3).jpg)
+
+
 
 2. Установить пакет tuned из стандартного репозитория вашей ОС. Запустить его, как демон — конфигурационный файл systemd появится автоматически при установке. Добавить tuned в автозагрузку.
-4. Изменить приветствие системы (motd) при входе на любое другое. Пожалуйста, в этом задании используйте переменную для задания приветствия. Переменную можно задавать любым удобным способом.
-![скрин для Git](https://github.com/netology-code/sdvps-homeworks/assets/77622076/e73589cf-7e97-40e5-ac01-d1d55376f1b9)
+
+playbook2.yml
+
+```yaml
+- hosts: test_servers
+  become:
+    true
+  become_method:
+    sudo
+  become_user:
+    root
+  remote_user:
+    cubic
+  roles:
+   - tuned
+```
+
+/etc/ansible/roles/tuned/tasks/main.yml
+
+```yaml
+- name: Update and upgrade apt packages
+  become: true
+  apt:
+    update_cache: yes
+    cache_valid_time: 86400
+
+- name: Install tuned
+  apt:
+    name=tuned
+    state=present
+  notify:
+    - tuned systemd
+```
+
+
+/etc/ansible/roles/tuned/handlers/main.yml
+
+```yaml
+- name: tuned systemd
+  systemd:
+    name: tuned
+    enabled: yes
+    state: started
+```
+
+Ход выполнения:
+
+![скрин для Git](https://github.com/ElenaKazantseva/homeworks/blob/hw-ansible-2/img/2%20(5).jpg)
+
+![скрин для Git](https://github.com/ElenaKazantseva/homeworks/blob/hw-ansible-2/img/2%20(6).jpg)
+
+
+
+3. Изменить приветствие системы (motd) при входе на любое другое. Пожалуйста, в этом задании используйте переменную для задания приветствия. Переменную можно задавать любым удобным способом.
+
+playbook3.yml
+
+```yaml
+- hosts: test_servers
+  gather_facts: yes
+  become:
+    true
+  become_method:
+    sudo
+  become_user:
+    root
+  remote_user:
+    cubic
+  vars:
+    hello1: printf " Hello from Ansible! "
+  tasks:
+    - name: Add a line to a file
+      ansible.builtin.lineinfile:
+        path: /etc/update-motd.d/00-header
+        line: " {{ hello1 }} "
+```
+
+
+Ход выполнения:
+
+![скрин для Git](https://github.com/ElenaKazantseva/homeworks/blob/hw-ansible-2/img/3.jpg)
 
 ---
 
