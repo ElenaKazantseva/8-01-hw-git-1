@@ -345,7 +345,7 @@ HDD : {{ hostvars['dog2']['ansible_facts']['devices']['vda']['size'] }}
 
 ![скрин для Git](https://github.com/ElenaKazantseva/homeworks/blob/hw-ansible-2/img/4%20(2).jpg)
 
-Скриншоты сайта index.html с обоих хостов.
+Скриншоты сайта index.html с обоих хостов:
 
 Да, вышло не очень красиво, но зато все получилось.
 
@@ -364,3 +364,4 @@ HDD : {{ hostvars['dog2']['ansible_facts']['devices']['vda']['size'] }}
 
 ![скрин для Git](https://github.com/ElenaKazantseva/homeworks/blob/hw-ansible-2/img/2%20(4).jpg)
 
+Файлы .yml представила сразу здесь в виде кода, потому что мне кажется, так гораздо удобнее и быстрее сразу посмотреть и прочитать.
