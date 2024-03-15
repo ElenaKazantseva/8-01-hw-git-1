@@ -346,14 +346,16 @@ HDD : {{ hostvars['dog2']['ansible_facts']['devices']['vda']['size'] }}
 
 ![скрин для Git](https://github.com/ElenaKazantseva/homeworks/blob/hw-ansible-2/img/2%20(4).jpg)
 
+Здесь указаны внешние ip адреса
 
+Ход выполнения:
 
-![скрин для Git](https://github.com/netology-code/sdvps-homeworks/assets/77622076/e73589cf-7e97-40e5-ac01-d1d55376f1b9)
+![скрин для Git](https://github.com/ElenaKazantseva/homeworks/blob/hw-ansible-2/img/4%20(1).jpg)
 
-![скрин для Git](https://github.com/netology-code/sdvps-homeworks/assets/77622076/e73589cf-7e97-40e5-ac01-d1d55376f1b9)
+![скрин для Git](https://github.com/ElenaKazantseva/homeworks/blob/hw-ansible-2/img/4%20(2).jpg)
 
+![скрин для Git](https://github.com/ElenaKazantseva/homeworks/blob/hw-ansible-2/img/4%20(3).jpg)
 
-![скрин для Git](https://github.com/netology-code/sdvps-homeworks/assets/77622076/e73589cf-7e97-40e5-ac01-d1d55376f1b9)
 
 ![скрин для Git](https://github.com/netology-code/sdvps-homeworks/assets/77622076/e73589cf-7e97-40e5-ac01-d1d55376f1b9)
 
