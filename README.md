@@ -341,18 +341,15 @@ HDD : {{ hostvars['dog2']['ansible_facts']['devices']['vda']['size'] }}
 
 Ход выполнения:
 
-
-Файл inventory для всех плейбуков:
-
-![скрин для Git](https://github.com/ElenaKazantseva/homeworks/blob/hw-ansible-2/img/2%20(4).jpg)
-
-Здесь указаны внешние ip адреса
-
-Ход выполнения:
-
 ![скрин для Git](https://github.com/ElenaKazantseva/homeworks/blob/hw-ansible-2/img/4%20(1).jpg)
 
 ![скрин для Git](https://github.com/ElenaKazantseva/homeworks/blob/hw-ansible-2/img/4%20(2).jpg)
+
+Скриншоты сайта index.html с обоих хостов.
+
+Да, вышло не очень красиво, но зато все получилось.
+
+Здесь указаны внутренние ip адреса, так как была взята переменная от ansible_facts `{{ hostvars['cat1']['ansible_facts']['eth0']['ipv4']['address'] }}`, как это было необходимо в задании. Ниже прилагаю подтверждение, что данные внутренние ip адреса действительно принадлежат хостам:
 
 ![скрин для Git](https://github.com/ElenaKazantseva/homeworks/blob/hw-ansible-2/img/4%20(3).jpg)
 
@@ -361,3 +358,9 @@ HDD : {{ hostvars['dog2']['ansible_facts']['devices']['vda']['size'] }}
 ![скрин для Git](https://github.com/ElenaKazantseva/homeworks/blob/hw-ansible-2/img/4%20(5).jpg)
 
 ![скрин для Git](https://github.com/ElenaKazantseva/homeworks/blob/hw-ansible-2/img/4%20(4).jpg)
+
+
+Файл inventory для всех плейбуков:
+
+![скрин для Git](https://github.com/ElenaKazantseva/homeworks/blob/hw-ansible-2/img/2%20(4).jpg)
+
